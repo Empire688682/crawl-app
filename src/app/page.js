@@ -1,16 +1,10 @@
-import DownloadApp from '@/component/DownloadApp/DownloadApp'
-import Enhance from '@/component/Enhance/Enhance'
-import Footer from '@/component/Footer/Footer'
-import Hero from '@/component/Hero/Hero'
 import React from 'react'
+import HeroCover from '@/component/HeroCover/HeroCover'
 
 const page = () => {
   return (
-    <div>
-      <Hero />
-      <DownloadApp />
-      <Enhance />
-      <Footer />
+    <div className='flex flex-col justify-center items-center h-screen w-full'>
+      <HeroCover />
     </div>
   )
 }

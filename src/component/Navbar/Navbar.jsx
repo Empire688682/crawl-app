@@ -1,10 +1,14 @@
+"use client"
 import React from 'react';
 import Image from 'next/image';
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
+  const pathName = usePathname();
+ const isHomepage = pathName === "/";
   return (
-    <nav className='pl-3 pr-3 md:pl-6 md:pr-6 py-3 flex items-center justify-between w-full'>
+    <nav className={` ${isHomepage? "hidden":"flex"} pl-3 pr-3 md:pl-6 md:pr-6 py-3 flex items-center justify-between w-full`}>
       {/* Logo */}
       <Image
         src="/crawl-logo.png"
