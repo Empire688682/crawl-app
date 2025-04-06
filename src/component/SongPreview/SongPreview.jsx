@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Pause, Rewind } from 'lucide-react';
+import { Play, Pause, Rewind, FastForward  } from 'lucide-react';
 import Image from 'next/image';
 
 const SongPreview = () => {
@@ -43,6 +43,9 @@ const SongPreview = () => {
           </button>
           <button className="hover:text-gray-300">
             <Play />
+          </button>
+          <button className="hover:text-gray-300">
+            <FastForward  />
           </button>
         </div>
 
