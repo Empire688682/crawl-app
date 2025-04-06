@@ -10,7 +10,7 @@ const Footer = () => {
             <div className='w-full grid grid-cols-2 md:grid-cols-5 items-start p-10 gap-4 bg-[#121212] min-h-[40vh] rounded-2xl'>
             <div className="cursor-pointer flex items-center justify-center">
             <Image
-                    src="/crawl-logo.png"
+                    src="/crawl-logo-2.png"
                     alt="Logo"
                     width={30}
                     height={30}

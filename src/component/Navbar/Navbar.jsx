@@ -10,11 +10,12 @@ const Navbar = () => {
   const pathName = usePathname();
  const isHomepage = pathName === "/";
  const isDiscover = pathName === "/discover";
+ const isLibrary = pathName === "/library";
   return (
-    <nav className={` ${isHomepage? "hidden":"flex"} pl-3 pr-3 md:pl-6 md:pr-6 py-3 flex items-center justify-between w-full`}>
+    <nav className={` ${isHomepage || isLibrary ? "hidden":"flex"} pl-3 pr-3 md:pl-6 md:pr-6 py-3 flex items-center justify-between w-full`}>
       {/* Logo */}
       <Image
-        src="/crawl-logo.png"
+        src="/crawl-logo-2.png"
         alt="Logo"
         width={50}
         height={50}
@@ -22,12 +23,14 @@ const Navbar = () => {
       />
 
       <div className='flex items-center gap-10'>
-        {/* Navigation Links */}
+        <div className={`${isDiscover? "hidden": "block"}`}>
+          {/* Navigation Links */}
         <ul className="hidden md:flex items-center gap-10 text-base font-medium">
           <li className="cursor-pointer hover:text-gray-600" onClick={()=>route.push("/discover")}>iOS</li>
           <li className="cursor-pointer hover:text-gray-600">Android</li>
           <li className="cursor-pointer hover:text-gray-600">Support</li>
         </ul>
+        </div>
 
         {/* Profile Section */}
         <div className={`${isDiscover? "hidden": "flex"} items-center gap-2`}>

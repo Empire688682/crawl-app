@@ -4,7 +4,7 @@ import React from 'react';
 
 const Page = () => {
   return (
-    <div className='flex flex-col justify-center min-h-[80vh] w-full pb-10'>
+    <div className='flex flex-col justify-center min-h-[80vh] w-full py-18'>
       <Discover />
     </div>
   )

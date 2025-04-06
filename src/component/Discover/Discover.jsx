@@ -9,22 +9,22 @@ const Discover = () => {
             <h1 className='text-3xl md:text-5xl text-center font-bold'>Discover a World of Exlusive Music with Crawl</h1>
             <div className='flex flex-col gap-4'>
             <button className='flex items-center justify-center w-full mx-auto md:mx-0 gap-2 bg-gray-800 text-base md:text-1xl rounded-full border-white text-white cursor-pointer px-4 py-2'>
-                <FaGoogle className='text-2xl animate-bounce text-black bg-white p-1 rounded-full' />
+                <FaGoogle className='text-3xl text-white p-1 rounded-full' />
                 Continue with Google
             </button>
             <button className='flex items-center justify-center w-full mx-auto md:mx-0 gap-2 bg-gray-800 text-base md:text-1xl rounded-full border-white text-white cursor-pointer px-4 py-2'>
-                <AiTwotoneMail className='text-2xl animate-bounce text-black bg-white p-1 rounded-full' />
+                <AiTwotoneMail className='text-3xl text-white p-1 rounded-full' />
                 Continue with Email
             </button>
             <button className='flex items-center justify-center w-full mx-auto md:mx-0 gap-2 bg-gray-800 text-base md:text-1xl rounded-full border-white text-white cursor-pointer px-4 py-2'>
-                <FaApple className='text-2xl animate-bounce text-black bg-white p-1 rounded-full' />
+                <FaApple className='text-3xl text-white p-1 rounded-full' />
                 Continue with Apple
             </button>
             </div>
-            <button className='flex bg-white text-black items-center justify-center w-full mx-auto md:mx-0 gap-2 rounded-full border-white cursor-pointer px-4 py-2'>
+            <button className='flex bg-white text-black font-semibold items-center justify-center w-full mx-auto md:mx-0 gap-2 rounded-full border-white cursor-pointer px-4 py-2'>
                 Login with password
             </button>
-            <p className='text-center'>Don't have an account? <span className='font-bold cursor-pointer'>Sign Up</span></p>
+            <p className='text-center mt-13'>Don't have an account? <span className='font-bold cursor-pointer'>Sign Up</span></p>
         </div>
     )
 }
