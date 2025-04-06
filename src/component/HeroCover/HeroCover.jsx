@@ -1,7 +1,6 @@
 "use client";
 import React from 'react';
 import Image from 'next/image';
-import { FaArrowDown } from "react-icons/fa6";
 import { useGlobalContext } from '../Context';
 
 const HeroCover = () => {
@@ -17,9 +16,8 @@ const HeroCover = () => {
                     style={{ objectFit: "contain" }}
                 />
             </div>
-            <button onClick={()=>route.push("/landing-page")} className='flex items-center font-semibold justify-center text-black max-w-[300px] mx-auto md:mx-0 gap-2 bg-white rounded-full px-4 py-2'>
+            <button onClick={()=>route.push("/landing-page")} className='flex items-center font-semibold justify-center text-black max-w-[300px] mx-auto md:mx-0 gap-2 bg-white rounded-full px-6 py-3'>
                 DOWNLOAD THE APP
-                <FaArrowDown className='text-2xl animate-bounce text-black bg-white p-1 rounded-full' />
             </button>
         </div>
     )
