@@ -1,39 +1,47 @@
-import React from 'react';
-import { Play, Pause, Rewind, FastForward  } from 'lucide-react';
+import React, { useState } from 'react';
+import { Play, Pause, Rewind, FastForward } from 'lucide-react';
 import Image from 'next/image';
 
-const SongPreview = () => {
-  return (
-    <div className="min-h-screen bg-[#1E1E1E] text-white flex flex-col items-center justify-center p-6">
-      {/* Logo */}
-      <Image
-        src="/crawl-logo-2.png"
-        alt="Logo"
-        width={50}
-        height={50}
-        className="cursor-pointer"
-      />
+const SongPreview = ({
+  name,
+  artist,
+  album,
+  genre,
+  duration,
+  coverImg,
+  lyrics,
+  aboutArtist,
+  releaseDate,
+  producer,
+  composer,
+  credits,
+}) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showAllCredits, setShowAllCredits] = useState(false);
 
+  return (
+    <div className="min-h-screen text-white flex flex-col items-center gap-6 justify-center p-6">
       <div className="w-full max-w-md flex flex-col items-center gap-4">
         <Image
-          src="/rema-play.png"
-          alt="Rema - Baby (Is it a Crime)"
+          src={coverImg}
+          alt={`${artist}-${name}-cover-(Crawl)`}
+          title={`${artist}-${name}-cover-(Crawl)`}
           width={400}
           height={400}
-          className="rounded-lg object-cover"
+          style={{ objectFit: "cover", borderRadius: "9px" }}
         />
 
         <div className="text-sm text-gray-400">Preview</div>
-        <div className="text-lg font-semibold text-white">Baby (Is it a Crime)</div>
-        <div className="text-sm text-gray-400">Rema</div>
+        <div className="text-lg font-semibold text-white">{name}</div>
+        <div className="text-sm text-gray-400">{artist}</div>
 
         <div className="w-full mt-4">
           <div className="w-full h-1 bg-gray-700 rounded">
             <div className="h-1 bg-white w-[20%] rounded"></div>
           </div>
           <div className="flex justify-between text-xs text-gray-400 mt-1">
-            <span>1:02</span>
-            <span>10 secs</span>
+            <span>{duration}</span>
+            <span>60 secs</span>
           </div>
         </div>
 
@@ -41,20 +49,102 @@ const SongPreview = () => {
           <button className="hover:text-gray-300">
             <Rewind />
           </button>
-          <button className="hover:text-gray-300">
-            <Play />
+          <button
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="hover:text-gray-300"
+          >
+            {isPlaying ? <Pause /> : <Play />}
           </button>
           <button className="hover:text-gray-300">
-            <FastForward  />
+            <FastForward />
           </button>
         </div>
 
         <button className="mt-6 bg-white text-black px-6 py-2 rounded-full font-semibold text-sm hover:bg-gray-200">
           Buy Now! ₦1,000.00
         </button>
+
+        <Image
+          src="/QRCODE.png"
+          alt="Qr-Code"
+          width={60}
+          height={60}
+          className="rounded-lg object-cover mt-13"
+        />
+      </div>
+
+      {/* About Artist */}
+      <div className="bg-[#1E1E1E] md:max-w-[500px] max-w-[300px] min-w-[300px] md:min-w-[500px] rounded-lg mt-22 pb-4 overflow-hidden">
+        <div className="relative w-full h-[200px]">
+          <Image
+            src={coverImg}
+            alt="Cover"
+            fill
+            style={{ objectFit: 'cover' }}
+          />
+          <h1 className="absolute top-[10px] left-[20px] text-white md:text-2xl text-xl font-semibold">
+            About the Artist
+          </h1>
+        </div>
+        <h2 className="text-xl p-3 font-semibold">{artist}</h2>
+        <p className="px-3">{aboutArtist}</p>
+      </div>
+
+      {/* Credits */}
+      <div className="bg-[#1E1E1E] md:max-w-[500px] max-w-[300px] min-w-[300px] md:min-w-[500px] rounded-lg mt-7 p-3">
+        <div className="flex justify-between mb-3 items-center">
+          <h2 className="text-xl font-semibold">Credits</h2>
+          <button
+            onClick={() => setShowAllCredits(!showAllCredits)}
+            className="text-sm text-white hover:text-gray-300"
+          >
+            {showAllCredits ? 'Show less' : 'See all'}
+          </button>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <div>
+            <h3 className="font-bold text-sm">{artist}</h3>
+            <p className="text-xs">Main Artist</p>
+          </div>
+          <div>
+            <h3 className="font-bold text-sm">{composer}</h3>
+            <p className="text-xs">Composer</p>
+          </div>
+          <div>
+            <h3 className="font-bold text-sm">{producer}</h3>
+            <p className="text-xs">Producer</p>
+          </div>
+
+          {showAllCredits && (
+            <>
+              <div>
+                <h3 className="font-bold text-sm">{album}</h3>
+                <p className="text-xs">Album</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-sm">{genre}</h3>
+                <p className="text-xs">Genre</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-sm">{releaseDate}</h3>
+                <p className="text-xs">Release Date</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-sm">{credits}</h3>
+                <p className="text-xs">Credits</p>
+              </div>
+            </>
+          )}
+        </div>
+        {/**Lyrics */}
+        <div className="bg-[#1E1E1E] md:max-w-[500px] max-w-[300px] min-w-[300px] md:min-w-[500px] rounded-lg mt-7 p-3">
+          <h2 className="text-xl font-semibold">Credits</h2>
+          <p>{lyrics}</p>
+        </div>
       </div>
     </div>
   );
-}
+};
 
-export default SongPreview
+export default SongPreview;

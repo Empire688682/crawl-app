@@ -39,7 +39,22 @@ const page = () => {
                   <h1 className='text-2xl font-bold'>Song not found</h1>
                 </div>
               ) : (
-                <SongPreview />
+                <SongPreview
+                name={song.name}
+                artist={song.artist}
+                album={song.album}
+                genre={song.genre} 
+                duration={song.duration}
+                coverImg={song.coverImg}
+                audioFile={song.audioFile}
+                lyrics={song.lyrics}
+                aboutArtist={song.aboutArtist}
+                releaseDate={song.releaseDate}
+                producer={song.producer}
+                composer={song.composer}
+                credits={song.credits}
+                mainArtist={song.mainArtist}
+                />
               )
             }
           </div>
