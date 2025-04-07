@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Rewind, FastForward } from 'lucide-react';
 import Image from 'next/image';
 
@@ -9,6 +9,7 @@ const SongPreview = ({
   genre,
   duration,
   coverImg,
+  audioFile, // make sure this is a valid audio URL
   lyrics,
   aboutArtist,
   releaseDate,
@@ -18,9 +19,61 @@ const SongPreview = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showAllCredits, setShowAllCredits] = useState(false);
+  const audioRef = useRef(null);
+  const [currentTime, setCurrentTime] = useState(0);
+
+  // Play/Pause toggle
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.currentTime = 0; 
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  // Stop after 30s
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(audio.currentTime);
+      if (audio.currentTime >= 30) {
+        audio.pause();
+        setIsPlaying(false);
+      }
+    };
+
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    return () => audio.removeEventListener('timeupdate', handleTimeUpdate);
+  }, []);
+
+  const handleFastForward = () =>{
+    if (!audioRef.current) return;
+    audioRef.current.currentTime += 5;
+    if (audioRef.current.currentTime >= 30) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.pause();
+      setIsPlaying(false);
+    }
+  }
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+    return `${minutes}:${paddedSeconds}`;
+  };
 
   return (
     <div className="min-h-screen text-white flex flex-col items-center gap-6 justify-center p-6">
+      {/* AUDIO ELEMENT */}
+      <audio ref={audioRef} src={audioFile} />
+
       <div className="w-full max-w-md flex flex-col items-center gap-4">
         <Image
           src={coverImg}
@@ -28,7 +81,7 @@ const SongPreview = ({
           title={`${artist}-${name}-cover-(Crawl)`}
           width={400}
           height={400}
-          style={{ objectFit: "cover", borderRadius: "9px" }}
+          style={{ objectFit: 'cover', borderRadius: '9px' }}
         />
 
         <div className="text-sm text-gray-400">Preview</div>
@@ -37,25 +90,25 @@ const SongPreview = ({
 
         <div className="w-full mt-4">
           <div className="w-full h-1 bg-gray-700 rounded">
-            <div className="h-1 bg-white w-[20%] rounded"></div>
+            <div
+              className="h-1 bg-white rounded"
+              style={{ width: `${(currentTime / 30) * 100}%` }}
+            ></div>
           </div>
           <div className="flex justify-between text-xs text-gray-400 mt-1">
-            <span>{duration}</span>
-            <span>60 secs</span>
+            <span>{formatTime(currentTime)}s</span>
+            <span>30 secs</span>
           </div>
         </div>
 
         <div className="flex items-center justify-center gap-6 mt-4">
-          <button className="hover:text-gray-300">
+          <button className="hover:text-gray-300" onClick={() => audioRef.current.currentTime = 0}>
             <Rewind />
           </button>
-          <button
-            onClick={() => setIsPlaying(!isPlaying)}
-            className="hover:text-gray-300"
-          >
+          <button onClick={togglePlay} className="hover:text-gray-300">
             {isPlaying ? <Pause /> : <Play />}
           </button>
-          <button className="hover:text-gray-300">
+          <button className="hover:text-gray-300" onClick={handleFastForward}>
             <FastForward />
           </button>
         </div>
@@ -74,7 +127,7 @@ const SongPreview = ({
       </div>
 
       {/* About Artist */}
-      <div className="bg-[#1E1E1E] md:max-w-[500px] max-w-[300px] min-w-[300px] md:min-w-[500px] rounded-lg mt-22 pb-4 overflow-hidden">
+      <div className="bg-[#1E1E1E] max-w-[600px] w-full max-auto rounded-lg mt-22 pb-4 overflow-hidden">
         <div className="relative w-full h-[200px]">
           <Image
             src={coverImg}
@@ -91,7 +144,7 @@ const SongPreview = ({
       </div>
 
       {/* Credits */}
-      <div className="bg-[#1E1E1E] md:max-w-[500px] max-w-[300px] min-w-[300px] md:min-w-[500px] rounded-lg mt-7 p-3">
+      <div className="bg-[#1E1E1E] max-w-[600px] w-full max-auto rounded-lg mt-7 p-3">
         <div className="flex justify-between mb-3 items-center">
           <h2 className="text-xl font-semibold">Credits</h2>
           <button
@@ -137,11 +190,12 @@ const SongPreview = ({
             </>
           )}
         </div>
-        {/**Lyrics */}
-        <div className="bg-[#1E1E1E] md:max-w-[500px] max-w-[300px] min-w-[300px] md:min-w-[500px] rounded-lg mt-7 p-3">
-          <h2 className="text-xl font-semibold">Credits</h2>
-          <p>{lyrics}</p>
-        </div>
+      </div>
+
+      {/* Lyrics */}
+      <div className="bg-[#1E1E1E] max-w-[600px] w-full max-auto rounded-lg mt-7 p-3">
+        <h2 className="text-xl font-semibold">Lyrics</h2>
+        <p>{lyrics}</p>
       </div>
     </div>
   );
