@@ -69,7 +69,7 @@ const AlbumPreview = () => {
       </div>
 
       {/* Album Details */}
-      <div className="max-w-[600px] w-full max-auto rounded-lg mt-22 pb-4 overflow-hidden">
+      <div className="max-w-[700px] min-w-[400px] w-full max-auto rounded-lg mt-22 pb-4 overflow-hidden">
         <div className='flex items-center justify-between'>
           <div className='flex flex-col gap-2'>
             <div className='flex items-center gap-2'>
@@ -95,7 +95,7 @@ const AlbumPreview = () => {
           {/**To be change to Album */}
           {
             songs && songs.map((song) => (
-              <div className='flex items-center mb-3 justify-between cursor-pointer' onClick={()=>route.push(`/album-preview/${song._id}`)} key={song._id}>
+              <div className='flex items-center mb-3 justify-between cursor-pointer' onClick={()=>{route.push(`/album-preview/${song._id}`); window.scrollTo(0, 0);}} key={song._id}>
                 <div className='flex flex-col'>
                   <h2 className='font-semibold'>
                     {song.name}
