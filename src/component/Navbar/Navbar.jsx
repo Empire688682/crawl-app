@@ -9,23 +9,8 @@ const Navbar = () => {
   const { route } = useGlobalContext();
   const pathName = usePathname();
   const isLandingPage = pathName === "/landing-page";
-  const isLabrary = pathName === "/library";
   return (
     <nav>
-      {
-        /* Logo */
-        !isLandingPage && !isLabrary && (
-          <div className='pl-3 pr-3 md:pl-6 md:pr-6 py-3'>
-            <Image
-              src="/crawl-logo-2.png"
-              alt="Logo"
-              width={50}
-              height={50}
-              className="cursor-pointer"
-            />
-          </div>
-        )
-      }
       <div className={` ${isLandingPage ? "flex" : "hidden"} flex items-center pl-3 pr-3 md:pl-6 md:pr-6 py-3 justify-between w-full`}>
         {/* Logo */}
         <Image
