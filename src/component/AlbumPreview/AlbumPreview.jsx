@@ -69,7 +69,7 @@ const AlbumPreview = () => {
       </div>
 
       {/* Album Details */}
-      <div className="max-w-[700px] min-w-[400px] w-full max-auto rounded-lg mt-22 pb-4 overflow-hidden">
+      <div className="md:max-w-[600px] md:min-w-[55%] min-w-[90%] w-full max-auto rounded-lg mt-22 pb-4 overflow-hidden">
         <div className='flex items-center justify-between'>
           <div className='flex flex-col gap-2'>
             <div className='flex items-center gap-2'>
