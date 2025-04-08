@@ -55,7 +55,7 @@ const Library = () => {
                                 </div>
                             ))
                         ) : (
-                            <p className="text-center text-gray-500 mt-6 min-h-[50vh]">No songs match your search.</p>
+                            <p className="text-center text-gray-500 mt-6 min-h-[40vh]">No songs match your search.</p>
                         )}
                     </div>
                 </div>
