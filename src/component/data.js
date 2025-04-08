@@ -68,7 +68,7 @@ export const songs = [
       audioFile: '/Wizkid-Ft-Brent-Faiyaz-Piece-Of-My-Heart.mp3',
       lyrics: 'I gave you pieces of my heart, now I’m left in the dark... [full lyrics here]',
       aboutArtist: 'Wizkid is a global Afrobeats superstar from Nigeria.',
-      releaseDate: '2022-11-20',
+      releaseDate: '2024-11-20',
       producer: 'P2J',
       composer: 'Wizkid',
       credits: 'Produced by P2J, written and performed by Wizkid.'

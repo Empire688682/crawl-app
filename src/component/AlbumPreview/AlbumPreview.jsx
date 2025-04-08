@@ -95,8 +95,8 @@ const AlbumPreview = () => {
           {/**To be change to Album */}
           {
             songs && songs.map((song) => (
-              <div className='flex items-center justify-between cursor-pointer' onClick={()=>route.push(`/album-preview/${song._id}`)} key={song._id}>
-                <div className='flex flex-col mb-3'>
+              <div className='flex items-center mb-3 justify-between cursor-pointer' onClick={()=>route.push(`/album-preview/${song._id}`)} key={song._id}>
+                <div className='flex flex-col'>
                   <h2 className='font-semibold'>
                     {song.name}
                   </h2>

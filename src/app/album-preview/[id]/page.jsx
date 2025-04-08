@@ -3,26 +3,26 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { songs } from '@/component/data';
 import LoadingSpinner from '@/component/LoadingSpinner/LoadingSpinner';
-import SongPreview from '@/component/SongPreview/SongPreview';
+import AlbumSinglePrev from '@/component/AlbumSinglePrev/AlbumSinglePrev';
 
 const page = () => {
   const { id } = useParams();
-  const [song, setSong] = useState({});
+  const [track, setTrack] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   useEffect(() => {
-    const fetchSong = async () => {
-      const data = songs.find((song)=> song._id === Number(id));
-      if(data){
-        setSong(data);
+    const fetchtrack = async () => {
+      const data = songs.find((track) => track._id === Number(id));
+      if (data) {
+        setTrack(data);
         setLoading(false);
       }
-      else{
+      else {
         setLoading(false);
         setError(true);
       }
     }
-    fetchSong()
+    fetchtrack()
   }, [])
   return (
     <div className="min-h-screen text-white pr-6 pl-6 pb-22 pt-6">
@@ -36,24 +36,24 @@ const page = () => {
             {
               error ? (
                 <div className='h-[60vh] w-full flex items-center justify-center'>
-                  <h1 className='text-2xl font-bold'>Song not found</h1>
+                  <h1 className='text-2xl font-bold'>track not found</h1>
                 </div>
               ) : (
-                <SongPreview
-                name={song.name}
-                artist={song.artist}
-                album={song.album}
-                genre={song.genre} 
-                duration={song.duration}
-                coverImg={song.coverImg}
-                audioFile={song.audioFile}
-                lyrics={song.lyrics}
-                aboutArtist={song.aboutArtist}
-                releaseDate={song.releaseDate}
-                producer={song.producer}
-                composer={song.composer}
-                credits={song.credits}
-                mainArtist={song.mainArtist}
+                <AlbumSinglePrev
+                  name={track.name}
+                  artist={track.artist}
+                  album={track.album}
+                  genre={track.genre}
+                  duration={track.duration}
+                  coverImg={track.coverImg}
+                  audioFile={track.audioFile}
+                  lyrics={track.lyrics}
+                  aboutArtist={track.aboutArtist}
+                  releaseDate={track.releaseDate}
+                  producer={track.producer}
+                  composer={track.composer}
+                  credits={track.credits}
+                  mainArtist={track.mainArtist}
                 />
               )
             }

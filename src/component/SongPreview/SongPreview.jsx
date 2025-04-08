@@ -53,13 +53,14 @@ const SongPreview = ({
   }, []);
 
   const handleFastForward = () =>{
-    if (!audioRef.current) return;
-    audioRef.current.currentTime += 5;
-    if (audioRef.current.currentTime >= 30) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.pause();
-      setIsPlaying(false);
-    }
+    const audio = audioRef.current;
+    if(!audio) return;
+    audio.currentTime = Math.min(audio.currentTime + 3, 30);
+  }
+  const handleBackForward = () =>{
+    const audio = audioRef.current;
+    if(!audio) return;
+    audio.currentTime = Math.max(audio.currentTime - 3, 0);
   }
 
   const formatTime = (time) => {
@@ -102,7 +103,7 @@ const SongPreview = ({
         </div>
 
         <div className="flex items-center justify-center gap-6 mt-4">
-          <button className="hover:text-gray-300" onClick={() => audioRef.current.currentTime = 0}>
+          <button className="hover:text-gray-300" onClick={handleBackForward}>
             <Rewind />
           </button>
           <button onClick={togglePlay} className="hover:text-gray-300">
