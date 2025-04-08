@@ -139,7 +139,7 @@ const AlbumSinglePrev = ({
       </div>
 
       {/* About Artist */}
-      <div className="bg-[#1E1E1E] max-w-[600px] w-full max-auto rounded-lg mt-19 pb-4 overflow-hidden">
+      <div className="bg-[#1E1E1E] md:max-w-[600px] min-w-[90%] w-full max-auto rounded-lg mt-19 pb-4 overflow-hidden">
         <div className="relative w-full h-[200px]">
           <Image
             src="/Wizkid-Kese-Dance-cover.jpg"
@@ -153,7 +153,7 @@ const AlbumSinglePrev = ({
       </div>
 
       {/* Credits */}
-      <div className="bg-[#1E1E1E] max-w-[600px] w-full max-auto rounded-lg mt-7 p-3">
+      <div className="bg-[#1E1E1E] md:max-w-[600px] min-w-[90%] w-full max-auto rounded-lg mt-7 p-3">
         <div className="flex justify-between mb-3 items-center">
           <h2 className="text-xl font-semibold">Credits</h2>
           <button className="text-sm text-white hover:text-gray-300" onClick={()=>setShowAllCredits(!showAllCredits)}>See all</button>
