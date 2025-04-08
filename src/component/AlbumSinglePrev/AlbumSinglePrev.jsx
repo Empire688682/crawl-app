@@ -111,7 +111,7 @@ const AlbumSinglePrev = ({
             <div style={{width:`${currentTime / 30 * 100}%`}} className='h-full bg-white rounded-full'></div>
           </div>
           <div className="flex justify-between text-xs text-gray-400 mt-1">
-            <span>0:{Math.floor(currentTime)}</span>
+            <span>0:{Math.floor(currentTime)}s</span>
             <span>0:30</span>
           </div>
         </div>

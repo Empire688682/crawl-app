@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { IoIosSearch } from "react-icons/io";
 
-const SubNavbar = () => {
+const SubNavbar = ({setSearchTerm}) => {
     return (
         <header className="md:flex flex-col md:flex-row items-center mb-22 gap-6">
             <div className='flex items-center gap-6'>
@@ -25,6 +25,7 @@ const SubNavbar = () => {
                 <IoIosSearch className='text-gray-400 text-2xl' />
                 <input
                     type="text"
+                    onChange={(e)=>setSearchTerm(e.target.value)}
                     placeholder="Explore unreleased songs"
                     className=" outline-none flex-1 text-white bg-transparent w-full"
                 />
