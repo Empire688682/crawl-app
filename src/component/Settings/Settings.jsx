@@ -4,6 +4,7 @@ import { UserPlus, Pencil, Lock, Shield } from 'lucide-react'
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '../Lib/UseAuth';
+import { IoIosLogOut } from "react-icons/io";
 
 const Settings = () => {
   const { user } = useAuth()
@@ -53,7 +54,7 @@ const Settings = () => {
           </Link>
         ))}
       </div>
-      <div className='flex px-4 items-center hover:underline gap-2 cursor-pointer max-w-[150px] max-auto mt-13'>
+      <div className='flex items-center hover:underline gap-2 cursor-pointer max-w-[150px] max-auto mt-13'>
         <IoIosLogOut className="text-white text-shadow-black text-[20px]" />
         <button className="text-white text-center md:text-left">Logout</button>
       </div>

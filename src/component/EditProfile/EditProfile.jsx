@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import { IoCameraOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
 
