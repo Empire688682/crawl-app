@@ -194,9 +194,9 @@ const SongPreview = ({
       </div>
 
       {/* Lyrics */}
-      <div className="bg-[#1E1E1E] max-w-[600px] w-full max-auto rounded-lg mt-7 p-3">
+      <div className="bg-[#1E1E1E] max-w-[600px] min-[400px] w-full max-auto rounded-lg mt-7 p-3">
         <h2 className="text-xl font-semibold">Lyrics</h2>
-        <p>{lyrics}</p>
+        <p className='text-sm'>{lyrics}</p>
       </div>
     </div>
   );
