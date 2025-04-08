@@ -40,6 +40,7 @@ const AlbumSinglePrev = ({
   const audioRef = useRef(null);
   const [isplaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [showAllCredits, setShowAllCredits] = useState(false);
 
   useEffect(()=>{
     const audio = audioRef.current;
@@ -155,7 +156,7 @@ const AlbumSinglePrev = ({
       <div className="bg-[#1E1E1E] max-w-[600px] w-full max-auto rounded-lg mt-7 p-3">
         <div className="flex justify-between mb-3 items-center">
           <h2 className="text-xl font-semibold">Credits</h2>
-          <button className="text-sm text-white hover:text-gray-300">See all</button>
+          <button className="text-sm text-white hover:text-gray-300" onClick={()=>setShowAllCredits(!showAllCredits)}>See all</button>
         </div>
 
         <div className="flex flex-col gap-4">
@@ -176,22 +177,26 @@ const AlbumSinglePrev = ({
             <h3 className="font-bold text-sm">{dummy.producer}</h3>
             <p className="text-xs">Producer</p>
           </div>
-          <div>
-            <h3 className="font-bold text-sm">{dummy.album}</h3>
-            <p className="text-xs">Album</p>
-          </div>
-          <div>
-            <h3 className="font-bold text-sm">{dummy.genre}</h3>
-            <p className="text-xs">Genre</p>
-          </div>
-          <div>
-            <h3 className="font-bold text-sm">{dummy.releaseDate}</h3>
-            <p className="text-xs">Release Date</p>
-          </div>
-          <div>
-            <h3 className="font-bold text-sm">{dummy.credits}</h3>
-            <p className="text-xs">Credits</p>
-          </div>
+          {showAllCredits && (
+            <>
+              <div>
+                <h3 className="font-bold text-sm">{dummy.album}</h3>
+                <p className="text-xs">Album</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-sm">{dummy.genre}</h3>
+                <p className="text-xs">Genre</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-sm">{dummy.releaseDate}</h3>
+                <p className="text-xs">Release Date</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-sm">{dummy.credits}</h3>
+                <p className="text-xs">Credits</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
