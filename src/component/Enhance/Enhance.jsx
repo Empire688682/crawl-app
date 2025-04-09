@@ -27,7 +27,7 @@ const Enhance = () => {
                     alt='Icon'
                     />
                     <h2 className='md:text-1xl text-base font-semibold'>Play everywhere</h2>
-                    <p>Listing on your speakers, and other favorite devices</p>
+                    <p className='text-center'>Listing on your speakers, and other favorite devices</p>
                 </div>
                 <div className='flex flex-col gap-2 items-center'>
                 <Image

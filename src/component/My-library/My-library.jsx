@@ -24,7 +24,7 @@ const MyLibrary = () => {
             <section>
                 <div className='flex justify-between items-center'>
                 <div>
-                <h2 className="text-xl font-semibold mb-1">Purchased Songs</h2>
+                <h2 className="font-semibold mb-1">Purchased Songs</h2>
                 <p className="text-gray-400 mb-6">All the tracks you’ve unlocked</p>
                 </div>
                 <p className='text-white hover:text-gray-300 cursor-pointer'>See all</p>
