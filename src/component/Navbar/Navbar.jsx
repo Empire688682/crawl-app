@@ -29,9 +29,9 @@ const Navbar = () => {
           </ul>
 
           {/* Profile Section */}
-          <div className={`flex items-center gap-2`}>
+          <div className={`flex items-center gap-2`} onClick={() => route.push("/edit-profile")}>
             <Image
-              src="/crawl-user.png"
+              src="//profile-img.png"
               alt="User Profile"
               width={50}
               height={50}
