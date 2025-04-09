@@ -15,7 +15,7 @@ const Settings = () => {
 
   const userLinks = [
     { label: 'Edit Profile', icon: <Pencil size={18} />, href: '/edit-profile' },
-    { label: 'Change Password', icon: <Lock size={18} />, href: '/change-password' },
+    { label: 'Change Password', icon: <Lock size={18} />, href: '/forgot-pwd' },
     { label: 'Privacy', icon: <Shield size={18} />, href: '/privacy' },
   ]
 
@@ -25,8 +25,8 @@ const Settings = () => {
         <Image
           src={user?.avatar || '/default-avatar.png'}
           alt="Profile"
-          width={30}
-          height={30}
+          width={40}
+          height={40}
           className="rounded-full"
           style={{ objectFit: "cover" }}
         />

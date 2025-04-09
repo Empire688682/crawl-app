@@ -1,10 +1,10 @@
-import Library from '@/component/Library/Library';
+import MyLibrary from '@/component/My-library/My-library';
 import React from 'react';
 
 const Page = () => {
   return (
     <div>
-      <Library />
+      <MyLibrary />
     </div>
   )
 }
