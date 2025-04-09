@@ -1,8 +1,8 @@
 "use client";
 import React, {useState} from 'react';
-import ForgotPwdMpdalsOne from './ForgotPwdMpdals/ForgotPwdMpdalsOne';
-import ForgotPwdMpdalsTwo from './ForgotPwdMpdals/ForgotPwdMpdalsTwo';
-import ForgotPwdMpdalsThree from './ForgotPwdMpdals/ForgotPwdMpdalsThree';
+import ForgotPwdModalsOne from './ForgotPwdModals/ForgotPwdModalsOne';
+import ForgotPwdModalsTwo from './ForgotPwdModals/ForgotPwdModalsTwo';
+import ForgotPwdModalsThree from './ForgotPwdModals/ForgotPwdModalsThree';
 
 const ForgotPwd = () => {
     const [email, setEmail] = useState("");
@@ -11,13 +11,13 @@ const ForgotPwd = () => {
   return (
     <div>
       {
-        modal === "StageOne" && <ForgotPwdMpdalsOne setModal={setModal} />
+        modal === "StageOne" && <ForgotPwdModalsOne setModal={setModal} />
       }
       {
-        modal === "StageTwo" && <ForgotPwdMpdalsTwo setModal={setModal} />
+        modal === "StageTwo" && <ForgotPwdModalsTwo setModal={setModal} />
       }
       {
-        modal === "StageThree" && <ForgotPwdMpdalsThree setModal={setModal} />
+        modal === "StageThree" && <ForgotPwdModalsThree setModal={setModal} />
       }
     </div>
   )

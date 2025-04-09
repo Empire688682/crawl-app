@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-const ForgotPwdMpdalsOne = ({ setModal }) => {
+const ForgotPwdModalsOne = ({ setModal }) => {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
@@ -11,23 +11,25 @@ const ForgotPwdMpdalsOne = ({ setModal }) => {
     e.preventDefault()
     if (!email) return
     setSubmitted(true);
-    setModal(StageTwo)
     // Replace with real API call
-    console.log('Reset link sent to:', email)
+    console.log('Reset link sent to:', email);
+    setInterval(()=>{
+      setModal("StageTwo");
+    },2000)
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#1e1e1e] px-6">
+    <div className="min-h-[70vh] flex items-center justify-center px-6">
       <div className="w-full max-w-md text-center text-white space-y-6">
         {/* Logo */}
+        <div className='flex items-center justify-center'>
         <Image
           src="/crawl-logo-2.png"
           alt="Logo"
-          width={50}
-          height={50}
-          className="cursor-pointer"
-          onClick={() => route.push("/landing-page")}
+          width={70}
+          height={70}
         />
+        </div>
 
         {/* Heading */}
         <div>
@@ -68,4 +70,4 @@ const ForgotPwdMpdalsOne = ({ setModal }) => {
   )
 }
 
-export default ForgotPwdMpdalsOne
+export default ForgotPwdModalsOne

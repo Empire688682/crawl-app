@@ -128,7 +128,7 @@ const SongPreview = ({
       </div>
 
       {/* About Artist */}
-      <div className="bg-[#1E1E1E] md:max-w-[600px] md:min-w-[55%] min-w-[90%] max-auto rounded-lg mt-22 pb-4 overflow-hidden">
+      <div className="bg-[#1E1E1E] md:max-w-[600px] md:min-w-[55%] min-w-[94%] max-auto rounded-lg mt-22 pb-4 overflow-hidden">
         <div className="relative w-full h-[200px]">
           <Image
             src={coverImg}
@@ -145,7 +145,7 @@ const SongPreview = ({
       </div>
 
       {/* Credits */}
-      <div className="bg-[#1E1E1E] md:max-w-[600px] md:min-w-[55%] min-w-[90%] w-full max-auto rounded-lg mt-7 p-3">
+      <div className="bg-[#1E1E1E] md:max-w-[600px] md:min-w-[55%] min-w-[94%] w-full max-auto rounded-lg mt-7 p-3">
         <div className="flex justify-between mb-3 items-center">
           <h2 className="text-xl font-semibold">Credits</h2>
           <button
@@ -194,7 +194,7 @@ const SongPreview = ({
       </div>
 
       {/* Lyrics */}
-      <div className="bg-[#1E1E1E] md:max-w-[600px] md:min-w-[55%] min-w-[90%] w-full max-auto rounded-lg mt-7 p-3">
+      <div className="bg-[#1E1E1E] md:max-w-[600px] md:min-w-[55%] min-w-[94%] w-full max-auto rounded-lg mt-7 p-3">
         <h2 className="text-xl font-semibold">Lyrics</h2>
         <p className='text-sm'>{lyrics}</p>
       </div>

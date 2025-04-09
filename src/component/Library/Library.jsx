@@ -27,7 +27,7 @@ const Library = () => {
 
                 {/* Scrollable table wrapper */}
                 <div className="w-full overflow-x-auto">
-                    <div className="min-w-[500px]">
+                    <div className="min-w-[450px]">
                         {/* Header */}
                         <div className="grid grid-cols-5 gap-4 mb-4 bg-gray-800 p-3 rounded-lg font-medium text-sm text-gray-300">
                             <div className='flex items-center gap-2'>Name

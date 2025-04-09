@@ -4,7 +4,7 @@ import React from 'react'
 
 const Page = () => {
   return (
-    <div>
+    <div className='px-6 py-3'>
       <SubNavbar />
       <ForgotPwd />
     </div>
