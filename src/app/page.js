@@ -1,12 +1,25 @@
-import React from 'react'
+"use client";
+import React, { useState } from 'react'
 import HeroCover from '@/component/HeroCover/HeroCover'
+import LandingPage from '@/component/LandingPage/LandingPage';
 
-const page = () => {
+const Page = () => {
+  const [clicked, setClicked] = useState(false)
   return (
-    <div className='flex flex-col justify-center items-center h-screen w-full'>
-      <HeroCover />
+    <div>
+      {
+        clicked ? (
+          <div>
+            <LandingPage />
+          </div>
+        ):(
+          <div className='flex flex-col justify-center items-center h-screen w-full'>
+          <HeroCover setClicked={setClicked} />
+          </div>
+        )
+      }
     </div>
   )
 }
 
-export default page
+export default Page

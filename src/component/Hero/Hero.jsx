@@ -10,19 +10,29 @@ const Hero = () => {
                 <p className='text-sm md:text-lg md:text-left text-center font-medium'>Welcome to Crawl-wheren fans get exlusive access. Discover and stream independent music, support your favourite artists, and unlock exclusive listiening-all with a one-time payment. No subscriptions, just pure music.</p>
                 <button className='flex items-center justify-center max-w-[300px] mx-auto md:mx-0 gap-2 border-2 rounded-full border-white text-white px-4 py-2'>
                     DOWNLOAD THE APP
-                    <FaArrowDown className='text-2xl animate-bounce text-black bg-white p-1 rounded-full'/>
+                    <FaArrowDown className='text-2xl animate-bounce text-black bg-white p-1 mt-1 rounded-full' />
                 </button>
+                <div className='flex flex-col md:flex-row gap-4 mt-10 '>
+                    <button className='flex items-center justify-center max-w-[300px] mx-auto md:mx-0 gap-2 border-2 rounded-sm border-white text-white px-12 py-2'>
+                    <Image src="/apple-store.png" alt="Img" width={35} height={20} />
+                        Get it Google play
+                    </button>
+                    <button className='flex items-center justify-center max-w-[300px] mx-auto md:mx-0 gap-2 border-2 rounded-sm border-white text-white px-4 py-2'>
+                    <Image src="/apple-store.png" alt="Img" width={35} height={20} />
+                        Download on the app store
+                    </button>
+                </div>
             </div>
             <div className='relative'>
-            <div className='relative md:min-h-[500px] min-h-[300px] h-full md:block w-full'>
-          <Image
-            priority={true}
-            fill
-            src="/crawl-hero.png"
-            alt="Hero Image"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
+                <div className='relative md:min-h-[500px] min-h-[300px] h-full md:block w-full'>
+                    <Image
+                        priority={true}
+                        fill
+                        src="/crawl-hero.png"
+                        alt="Hero Image"
+                        style={{ objectFit: "cover" }}
+                    />
+                </div>
             </div>
         </div>
     )
