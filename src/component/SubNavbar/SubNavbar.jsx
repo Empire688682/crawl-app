@@ -19,10 +19,10 @@ const SubNavbar = ({setSearchTerm}) => {
                     width={50}
                     height={50}
                     className="cursor-pointer"
-                    onClick={()=>route.push("/landing-page")}
+                    onClick={()=>route.push("/")}
                 />
                 <nav className="flex gap-6">
-                    <Link href="/landing-page" className={`text-white hover:underline ${pathName ==="/landing-page" && "underline font-bold" }`}>Home</Link>
+                    <Link href="/" className={`text-white hover:underline ${pathName ==="/landing-page" && "underline font-bold" }`}>Home</Link>
                     <Link href="/library" className={`text-white hover:underline ${pathName ==="/library" && "underline font-bold" }`}>Library</Link>
                     <Link href="/settings" className={`text-white hover:underline ${pathName ==="/settings" && "underline font-bold" }`}>Settings</Link>
                 </nav>
