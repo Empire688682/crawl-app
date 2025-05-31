@@ -14,8 +14,8 @@ const HeroCover = ({setClicked}) => {
                     style={{ objectFit: "contain" }}
                 />
             </div>
-            <button onClick={()=>{setClicked(true); window.scrollTo(0, 0)}} className='flex items-center font-semibold justify-center text-black max-w-[300px] mx-auto md:mx-0 gap-2 bg-white rounded-full px-6 py-3'>
-                DOWNLOAD THE APP
+            <button onClick={()=>{setClicked(true); window.scrollTo(0, 0)}} className='flex items-center font-semibold justify-center text-black max-w-[300px] mx-auto md:mx-0 gap-2 bg-white rounded-full cursor-pointer px-9 py-3'>
+                Continue
             </button>
         </div>
     )
