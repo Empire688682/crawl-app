@@ -4,10 +4,10 @@ import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import { useGlobalContext } from '../Context';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import axios from "axios"
 
 const AuthForms = () => {
   const { publicApiUrl } = useGlobalContext();
-  console.log("publicApiUrl:", publicApiUrl);
 
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -97,6 +97,7 @@ const AuthForms = () => {
     }
   };
 
+
   const handleSubmit = async () => {
     if (!validateForm()) return;
 
@@ -117,63 +118,30 @@ const AuthForms = () => {
           username: formData.username,
           email: formData.email,
           password: formData.password,
+          confirm_password: formData.confirm_password,
           first_name: formData.first_name,
           last_name: formData.last_name,
           agreeToTerms: formData.agreeToTerms
         };
       }
 
-      console.log(`${isLogin ? 'Login' : 'Signup'} data:`, requestData);
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(requestData)
-      });
+      const response = await axios.post(endpoint, requestData);
 
       // Check if response is ok first
-      if (!response.ok) {
-        // Handle different HTTP status codes
-        switch (response.status) {
-          case 400:
-            toast.error('Invalid request data');
-            break;
-          case 401:
-            toast.error('Invalid credentials');
-            break;
-          case 404:
-            toast.error('Endpoint not found');
-            break;
-          case 405:
-            toast.error('Method not allowed - check your API endpoint');
-            break;
-          case 500:
-            toast.error('Server error - please try again later');
-            break;
-          default:
-            toast.error(`HTTP Error: ${response.status}`);
-        }
+      if (response.status !== 200) {
+        toast.error('Invalid request data');
         return;
       }
 
-      // Check if response has content
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        toast.error('Invalid response format from server');
-        return;
-      }
+      const result = response.data;
 
-      const result = await response.json();
       console.log(`${isLogin ? 'Login' : 'Signup'} result:`, result);
 
       // Check if the response contains the expected data
       if (result.token && result.user) {
         storeUserData(result);
       } else {
-        toast.error(result.error || result.message || 'Authentication failed');
+        toast.error(response.error || response.message || 'Authentication failed');
       }
 
     } catch (error) {
@@ -185,7 +153,7 @@ const AuthForms = () => {
       } else if (error.name === 'SyntaxError' && error.message.includes('JSON')) {
         toast.error('Invalid response from server');
       } else {
-        toast.error('An unexpected error occurred');
+        toast.error(error.response.data.error || error.response.data.Message);
       }
     } finally {
       setLoading(false);
