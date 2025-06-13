@@ -3,12 +3,11 @@
 import { UserPlus, Pencil, Lock, Shield } from 'lucide-react'
 import Image from 'next/image';
 import Link from 'next/link';
-import { useAuth } from '../Lib/UseAuth';
 import { IoIosLogOut } from "react-icons/io";
+import { useGlobalContext } from '../Context';
 
 const Settings = () => {
-  const { user } = useAuth()
-
+const {userData, logoutUser} = useGlobalContext()
   const guestLinks = [
     { label: 'Sign in / Register', icon: <UserPlus size={18} />, href: '/auth' },
   ]
@@ -23,7 +22,7 @@ const Settings = () => {
     <div className="min-h-[90vh] text-white pt-10 px-6">
       <div className="flex items-center gap-4 mb-8">
         <Image
-          src={user?.avatar || '/default-avatar.png'}
+          src='/bottom-icon-2.png'
           alt="Profile"
           width={40}
           height={40}
@@ -32,18 +31,17 @@ const Settings = () => {
         />
         <div>
           <h2 className="text-xl font-semibold">
-            {user?.isLoggedIn ? `Welcome Back, ${user.name}!` : `Welcome!`}
+            Welcome Back, {userData.first_name}!
           </h2>
           <p className="text-sm text-gray-400">
-            {user?.isLoggedIn
-              ? 'Early access. Fresh sounds. Just for you.'
-              : 'Join now to unlock music vibes.'}
+              Early access. Fresh sounds. Just for you.
+              Join now to unlock music vibes
           </p>
         </div>
       </div>
 
       <div className="space-y-6">
-        {(user?.isLoggedIn ? userLinks : guestLinks).map((item, index) => (
+        {userLinks.map((item, index) => (
           <Link
             key={index}
             href={item.href}
@@ -54,7 +52,8 @@ const Settings = () => {
           </Link>
         ))}
       </div>
-      <div className='flex items-center hover:underline gap-2 cursor-pointer max-w-[150px] max-auto mt-13'>
+      <div className='flex items-center hover:underline gap-2 cursor-pointer max-w-[150px] max-auto mt-13'
+      onClick={logoutUser}>
         <IoIosLogOut className="text-white text-shadow-black text-[20px]" />
         <button className="text-white text-center md:text-left">Logout</button>
       </div>

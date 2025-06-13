@@ -4,11 +4,10 @@ import Image from 'next/image'
 import {useState } from 'react';
 import { IoCameraOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
+import { useGlobalContext } from '../Context';
 
 const EditProfile = () => {
-  const [name, setName] = useState('Joseph Joe')
-  const [username, setUsername] = useState('joe')
-  const [phone, setPhone] = useState('08123456789');
+  const {userData, logoutUser} = useGlobalContext();
   const [image, setImage] = useState("");
   return (
     <div className="pb-10">
@@ -16,7 +15,7 @@ const EditProfile = () => {
       <h1 className="text-2xl font-bold mb-6">Edit Profile</h1>
       <div className="relative">
         <Image
-          src={image? window.URL.createObjectURL(image):"/profile-img.png"}
+          src={image? window.URL.createObjectURL(image):"/bottom-icon-2.png"}
           alt="Profile"
           width={100}
           height={100}
@@ -35,7 +34,7 @@ const EditProfile = () => {
           <input
             type="text"
             className="w-full px-4 py-2 outline-none rounded bg-gray-800 text-white border border-gray-600"
-            value={name}
+            value={`${userData.first_name} ${userData.last_name}`}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -45,24 +44,25 @@ const EditProfile = () => {
           <input
             type="text"
             className="w-full px-4 py-2 outline-none rounded bg-gray-800 text-white border border-gray-600"
-            value={username}
+            value={userData.username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
 
         <div>
-          <label className="block text-sm mb-1">Phone Number</label>
+          <label className="block text-sm mb-1">Email</label>
           <input
             type="text"
             className="w-full px-4 py-2 outline-none rounded bg-gray-800 text-white border border-gray-600"
-            value={phone}
+            value={userData.email}
             onChange={(e) => setPhone(e.target.value)}
           />
         </div>
       </div>
       </div>
 
-      <div className='flex px-4 items-center hover:underline gap-2 cursor-pointer max-w-[150px] max-auto mt-13'>
+      <div className='flex px-4 items-center hover:underline gap-2 cursor-pointer max-w-[150px] max-auto mt-13'
+      onClick={logoutUser}>
       <IoIosLogOut className="text-white text-shadow-black text-[20px]" />
       <button className="text-white text-center md:text-left">Logout</button>
       </div>
