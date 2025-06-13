@@ -23,18 +23,18 @@ export const AppProvider = ({ children }) => {
     }
   }, []);
 
-  const logoutUser = () =>{
-    if(typeof window !== "undefined"){
-      localStorage.removeItem("CrawlUser");
-      router.replace("/")
-    }
-  }
-
-  useEffect(() => {
+    useEffect(() => {
     if (!userData.token) {
       router.replace("/signup");
     }
-  }, [router]);
+  }, []);
+
+  const logoutUser = () =>{
+    if(typeof window !== "undefined"){
+      localStorage.removeItem("CrawlUser");
+      window.location.reload();
+    }
+  }
 
   return <AppContext.Provider value={{
     router,

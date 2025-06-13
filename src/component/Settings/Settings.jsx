@@ -31,7 +31,7 @@ const {userData, logoutUser} = useGlobalContext()
         />
         <div>
           <h2 className="text-xl font-semibold">
-            Welcome Back, {userData.username}!
+            Welcome Back, {userData?.username}!
           </h2>
           <p className="text-sm text-gray-400">
               Early access. Fresh sounds. Just for you.
