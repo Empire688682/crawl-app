@@ -5,7 +5,6 @@ import React, { useEffect } from 'react'
 
 const Page = () => {
     const {userData, router} = useGlobalContext();
-
     useEffect(()=>{
         if(userData?.token){
             router.replace("/library")
