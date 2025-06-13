@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const AuthForms = () => {
   const { publicApiUrl } = useGlobalContext();
+  console.log("publicApiUrl:", publicApiUrl);
 
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
