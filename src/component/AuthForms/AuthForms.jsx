@@ -4,7 +4,8 @@ import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import { useGlobalContext } from '../Context';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import axios from "axios"
+import axios from "axios";
+import Image from "next/image";
 
 const AuthForms = () => {
   const { publicApiUrl } = useGlobalContext();
@@ -125,7 +126,9 @@ const AuthForms = () => {
         };
       }
 
-      const response = await axios.post(endpoint, requestData);
+      const response = await axios.post(endpoint, requestData, {headers:{
+        "Access-Control-Allow-Origin" : true
+      }});
 
       // Check if response is ok first
       if (response.status !== 200) {
@@ -178,7 +181,7 @@ const AuthForms = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <ToastContainer 
         position="top-right"
         autoClose={3000}
@@ -193,6 +196,9 @@ const AuthForms = () => {
       />
       <div className="w-full max-w-md">
         <div className="bg-black rounded-lg p-8">
+        <div className="flex justify-center mb-8">
+            <Image src="/crawl-logo-.png" alt="Logo" width={100} height={100} />
+          </div>
           <h1 className="text-white text-2xl font-semibold text-center mb-8">
             {isLogin ? 'Login to your Account' : 'Sign UP'}
           </h1>
