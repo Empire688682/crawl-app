@@ -21,7 +21,7 @@ const AuthForms = () => {
     password: '',
     confirm_password: '',
     rememberMe: false,
-    agreeToTerms: false
+    agreeToTerms: false,
   });
 
   const handleInputChange = (e) => {
