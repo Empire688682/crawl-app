@@ -31,112 +31,163 @@ const AuthForms = () => {
     }));
   };
 
-  const handleSubmit = async () => {
-    if (isLogin) {
-      // Login logic - ready for backend integration
-      const loginData = {
-        username: formData.username,
-        password: formData.password
-      };
-
-      console.log('Login data:', loginData);
-
-      // Example API call:
-      try {
-        setLoading(true);
-        const response = await fetch(`${publicApiUrl}login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(loginData)
-        });
-        const result = await response.json();
-        console.log("result:", result)
-        if (response.ok) {
-          const now = new Date().getMinutes();
-          const threeDays = 1000 * 60 * 60 * 24 * 3;
-          const expiredAt = now + threeDays;
-          const token = result.token
-          const userData = {
-            token: token,
-            username: result.user.username,
-            subscription_status: result.user.subscription_status,
-            email: result.user.email,
-            first_name: result.user.first_name,
-            last_name: result.user.last_name,
-            expiredAt: expiredAt
-          }
-          localStorage.setItem("CrawlUser", JSON.stringify(userData));
-          window.location.reload();
-          console.log('Login successful:', result);
-
-        } else {
-          toast.error(result.error);
-        }
-      } catch (error) {
-        console.log('Login error:', error);
-        toast.error("An error occured");
+  // Helper function to validate form data
+  const validateForm = () => {
+    if (!formData.username.trim()) {
+      toast.error('Username is required');
+      return false;
+    }
+    if (!formData.password.trim()) {
+      toast.error('Password is required');
+      return false;
+    }
+    if (!isLogin) {
+      if (!formData.email.trim()) {
+        toast.error('Email is required');
+        return false;
       }
-      finally {
-        setLoading(false);
+      if (!formData.first_name.trim()) {
+        toast.error('First name is required');
+        return false;
       }
-
-    } else {
-      // Signup logic - ready for backend integration
+      if (!formData.last_name.trim()) {
+        toast.error('Last name is required');
+        return false;
+      }
       if (formData.password !== formData.confirm_password) {
-        alert('Passwords do not match!');
-        return;
+        toast.error('Passwords do not match');
+        return false;
       }
-
       if (!formData.agreeToTerms) {
-        alert('Please agree to the terms and conditions');
+        toast.error('Please agree to the terms and conditions');
+        return false;
+      }
+    }
+    return true;
+  };
+
+  // Helper function to store user data
+  const storeUserData = (result) => {
+    try {
+      const now = new Date().getTime(); 
+      const threeDays = 1000 * 60 * 60 * 24 * 3;
+      const expiredAt = now + threeDays;
+      
+      const userData = {
+        token: result.token,
+        username: result.user.username,
+        subscription_status: result.user.subscription_status,
+        email: result.user.email,
+        first_name: result.user.first_name,
+        last_name: result.user.last_name,
+        expiredAt: expiredAt
+      };
+      
+      localStorage.setItem("CrawlUser", JSON.stringify(userData));
+      toast.success(isLogin ? 'Login successful!' : 'Registration successful!');
+      
+      // Small delay to show success message before reload
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (error) {
+      console.error('Error storing user data:', error);
+      toast.error('Error saving user data');
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    try {
+      setLoading(true);
+      
+      let endpoint, requestData;
+      
+      if (isLogin) {
+        endpoint = `${publicApiUrl}login`;
+        requestData = {
+          username: formData.username,
+          password: formData.password
+        };
+      } else {
+        endpoint = `${publicApiUrl}users`;
+        requestData = {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+          first_name: formData.first_name,
+          last_name: formData.last_name,
+          agreeToTerms: formData.agreeToTerms
+        };
+      }
+
+      console.log(`${isLogin ? 'Login' : 'Signup'} data:`, requestData);
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+      });
+
+      // Check if response is ok first
+      if (!response.ok) {
+        // Handle different HTTP status codes
+        switch (response.status) {
+          case 400:
+            toast.error('Invalid request data');
+            break;
+          case 401:
+            toast.error('Invalid credentials');
+            break;
+          case 404:
+            toast.error('Endpoint not found');
+            break;
+          case 405:
+            toast.error('Method not allowed - check your API endpoint');
+            break;
+          case 500:
+            toast.error('Server error - please try again later');
+            break;
+          default:
+            toast.error(`HTTP Error: ${response.status}`);
+        }
         return;
       }
 
-      const signupData = {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-        agreeToTerms: formData.agreeToTerms
-      };
-
-      console.log('Signup data:', signupData);
-
-      // Example API call:
-      try {
-        setLoading(true)
-        const response = await fetch(`${publicApiUrl}users`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(signupData)
-        });
-        const result = await response.json();
-        if (response.ok) {
-          const now = new Date().getMinutes();
-          const threeDays = 1000 * 60 * 60 * 24 * 3;
-          const expiredAt = now + threeDays;
-          const token = result.token
-          const userData = {
-            token: token,
-            username: result.user.username,
-            subscription_status: result.user.subscription_status,
-            email: result.user.email,
-            first_name: result.user.first_name,
-            last_name: result.user.last_name,
-            expiredAt: expiredAt
-          }
-          localStorage.setItem("CrawlUser", JSON.stringify(userData));
-          window.location.reload();
-          console.log('Signup successful:', result);
-        } else {
-          // Handle signup error
-          console.log('Signup failed:', result.message);
-        }
-      } catch (error) {
-        console.log('Signup error:', error);
+      // Check if response has content
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        toast.error('Invalid response format from server');
+        return;
       }
-      finally {
-        setLoading(false)
+
+      const result = await response.json();
+      console.log(`${isLogin ? 'Login' : 'Signup'} result:`, result);
+
+      // Check if the response contains the expected data
+      if (result.token && result.user) {
+        storeUserData(result);
+      } else {
+        toast.error(result.error || result.message || 'Authentication failed');
       }
+
+    } catch (error) {
+      console.error(`${isLogin ? 'Login' : 'Signup'} error:`, error);
+      
+      // More specific error handling
+      if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+        toast.error('Network error - please check your connection');
+      } else if (error.name === 'SyntaxError' && error.message.includes('JSON')) {
+        toast.error('Invalid response from server');
+      } else {
+        toast.error('An unexpected error occurred');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -159,7 +210,18 @@ const AuthForms = () => {
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
-      <ToastContainer />
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="w-full max-w-md">
         <div className="bg-black rounded-lg p-8">
           <h1 className="text-white text-2xl font-semibold text-center mb-8">
@@ -167,7 +229,7 @@ const AuthForms = () => {
           </h1>
 
           <div className="space-y-6">
-            {/* Firstname Field */}
+            {/* First Name Field */}
             {
               !isLogin && (
                 <div className="relative">
@@ -178,12 +240,14 @@ const AuthForms = () => {
                     placeholder="First name"
                     value={formData.first_name}
                     onChange={handleInputChange}
-                    className="w-full bg-gray-800 text-white pl-12 pr-4 py-2 rounded-lg border border-gray-700 focus:border-gray-600 focus:outline-none"
+                    className="w-full bg-gray-800 text-white pl-12 pr-4 py-3 rounded-lg border border-gray-700 focus:border-gray-600 focus:outline-none"
                     required
                   />
                 </div>
               )
             }
+            
+            {/* Last Name Field */}
             {
               !isLogin && (
                 <div className="relative">
@@ -200,6 +264,8 @@ const AuthForms = () => {
                 </div>
               )
             }
+            
+            {/* Username Field */}
             <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
@@ -315,9 +381,9 @@ const AuthForms = () => {
               disabled={loading}
               type="button"
               onClick={handleSubmit}
-              className="w-full bg-white text-black py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
+              className="w-full bg-white text-black py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Processing...." : isLogin ? 'Login' : 'Register'}
+              {loading ? "Processing..." : isLogin ? 'Login' : 'Register'}
             </button>
 
             {/* Forgot Password (only for login) */}

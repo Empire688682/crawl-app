@@ -10,7 +10,7 @@ export const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState({})
 
   useEffect(()=>{
-    const now = new Date().getMinutes();
+    const now = new Date().getTime();
     if(typeof window !== "undefined"){
       const savedData = localStorage.getItem("CrawlUser");
       const parseData = savedData? JSON.parse(savedData) : null
