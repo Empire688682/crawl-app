@@ -126,9 +126,7 @@ const AuthForms = () => {
         };
       }
 
-      const response = await axios.post(endpoint, requestData, {headers:{
-        "Access-Control-Allow-Origin" : false
-      }});
+      const response = await axios.post(endpoint, requestData);
 
       // Check if response is ok first
       if (response.status !== 200) {
