@@ -14,7 +14,7 @@ export const AppProvider = ({ children }) => {
     if(typeof window !== "undefined"){
       const savedData = localStorage.getItem("CrawlUser");
       const parseData = savedData? JSON.parse(savedData) : null
-      if(now > parseData?.expiredAT ){
+      if(now > parseData?.expiredAt ){
         localStorage.removeItem(CrawlUser)
       }
       else{
@@ -24,10 +24,10 @@ export const AppProvider = ({ children }) => {
   }, []);
 
     useEffect(() => {
-    if (!userData.token) {
+    if (!userData?.token) {
       router.replace("/signup");
     }
-  }, []);
+  }, [userData]);
 
   const logoutUser = () =>{
     if(typeof window !== "undefined"){

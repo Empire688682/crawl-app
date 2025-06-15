@@ -31,7 +31,7 @@ const Settings = () => {
           <h2 className="text-xl font-semibold">
             Welcome Back, {userData?.username}!
           </h2>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-400 md:block hidden">
             Early access. Fresh sounds. Just for you. Join now to unlock music
             vibes
           </p>

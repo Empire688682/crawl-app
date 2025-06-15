@@ -34,7 +34,7 @@ const EditProfile = () => {
           <input
             type="text"
             className="w-full px-4 py-2 outline-none rounded bg-gray-800 text-white border border-gray-600"
-            value={`${userData.first_name} ${userData.last_name}`}
+            value={`${userData?.first_name} ${userData?.last_name}`}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -44,7 +44,7 @@ const EditProfile = () => {
           <input
             type="text"
             className="w-full px-4 py-2 outline-none rounded bg-gray-800 text-white border border-gray-600"
-            value={userData.username}
+            value={userData?.username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -54,7 +54,7 @@ const EditProfile = () => {
           <input
             type="text"
             className="w-full px-4 py-2 outline-none rounded bg-gray-800 text-white border border-gray-600"
-            value={userData.email}
+            value={userData?.email}
             onChange={(e) => setPhone(e.target.value)}
           />
         </div>
