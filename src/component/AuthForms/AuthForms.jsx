@@ -68,26 +68,27 @@ const AuthForms = () => {
     return true;
   };
 
-  // Helper function to store user data
+// Helper function to store user data
   const storeUserData = (result) => {
+    console.log("Result1:",  `${isLogin? result.user.username : result.username}`);
     try {
-      const now = new Date().getTime(); 
+      const now = new Date().getTime();
       const threeDays = 1000 * 60 * 60 * 24 * 3;
       const expiredAt = now + threeDays;
-      
+
       const userData = {
-        token: result.token,
-        username: result.user.username,
-        subscription_status: result.user.subscription_status,
-        email: result.user.email,
-        first_name: result.user.first_name,
-        last_name: result.user.last_name,
+        token: `${isLogin? result.token :  result.ID}`,
+        username: `${isLogin? result.user.username : result.username}`,
+        subscription_status: `${ isLogin? result.user.subscription_status : result.subscription_status}`,
+        email: `${isLogin? result.user.email : result.email}`,
+        first_name: `${isLogin? result.user.first_name : result.first_name}`,
+        last_name: `${isLogin?  result.user.last_name :  result.last_name}`,
         expiredAt: expiredAt
       };
-      
-      localStorage.setItem("CrawlUser", JSON.stringify(userData));
+
+      localStorage.setItem("CrawlAdmin", JSON.stringify(userData));
       toast.success(isLogin ? 'Login successful!' : 'Registration successful!');
-      
+
       // Small delay to show success message before reload
       setTimeout(() => {
         window.location.reload();
@@ -104,9 +105,9 @@ const AuthForms = () => {
 
     try {
       setLoading(true);
-      
+
       let endpoint, requestData;
-      
+
       if (isLogin) {
         endpoint = `${publicApiUrl}login`;
         requestData = {
@@ -128,26 +129,35 @@ const AuthForms = () => {
 
       const response = await axios.post(endpoint, requestData);
 
+      console.log("response:", response)
       // Check if response is ok first
-      if (response.status !== 200) {
+      if (![200, 201].includes(response.status)) {
         toast.error('Invalid request data');
         return;
       }
 
-      const result = response.data;
+      const result = isLogin ? response.data : response.data.Data
 
       console.log(`${isLogin ? 'Login' : 'Signup'} result:`, result);
 
       // Check if the response contains the expected data
-      if (result.token && result.user) {
-        storeUserData(result);
+      if (isLogin) {
+        if (result.token && result.user) {
+          storeUserData(result);
+        } else {
+          toast.error(response.error || response.message || 'Authentication failed');
+        }
       } else {
-        toast.error(response.error || response.message || 'Authentication failed');
+        if (result?.ID && result?.username) {
+          storeUserData(result);
+        } else {
+          toast.error(response.error || response.message || 'Authentication failed');
+        }
       }
 
     } catch (error) {
       console.error(`${isLogin ? 'Login' : 'Signup'} error:`, error);
-      
+
       // More specific error handling
       if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
         toast.error('Network error - please check your connection');
@@ -161,6 +171,7 @@ const AuthForms = () => {
     }
   };
 
+  
   const toggleForm = () => {
     setIsLogin((prev) => !prev);
     // Reset form when switching
