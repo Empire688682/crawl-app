@@ -8,7 +8,7 @@ import { useGlobalContext } from '../Context';
 
 const SubNavbar = ({setSearchTerm}) => {
     const pathName = usePathname();
-    const {route} = useGlobalContext();
+    const {router} = useGlobalContext();
     return (
         <header className="md:flex flex-col md:flex-row items-center mb-6 gap-8">
             <div className='flex items-center gap-6'>
@@ -19,7 +19,7 @@ const SubNavbar = ({setSearchTerm}) => {
                     width={50}
                     height={50}
                     className="cursor-pointer"
-                    onClick={()=>route.push("/")}
+                    onClick={()=>router.push("/")}
                 />
                 <nav className="flex gap-6">
                     <Link href="/" className={`text-white hover:underline ${pathName ==="/landing-page" && "underline font-bold" }`}>Home</Link>

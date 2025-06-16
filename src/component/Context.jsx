@@ -24,7 +24,7 @@ export const AppProvider = ({ children }) => {
   }, []);
 
     useEffect(() => {
-    if (!userData?.token) {
+    if (!userData?.token && !userData?.username) {
       router.replace("/signup");
     }
   }, [userData]);

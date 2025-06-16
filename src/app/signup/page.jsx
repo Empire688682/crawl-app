@@ -4,9 +4,10 @@ import { useGlobalContext } from '@/component/Context';
 import React, { useEffect } from 'react'
 
 const Page = () => {
-    const {userData, router} = useGlobalContext();
+    const {userData, router} =useGlobalContext();
     useEffect(()=>{
-        if(userData?.token){
+      console.log("userData:", userData)
+        if(userData?.token && userData?.username){
             router.replace("/library")
         }
     }, [userData]);

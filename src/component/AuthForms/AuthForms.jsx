@@ -70,7 +70,6 @@ const AuthForms = () => {
 
 // Helper function to store user data
   const storeUserData = (result) => {
-    console.log("Result1:",  `${isLogin? result.user.username : result.username}`);
     try {
       const now = new Date().getTime();
       const threeDays = 1000 * 60 * 60 * 24 * 3;
@@ -86,7 +85,7 @@ const AuthForms = () => {
         expiredAt: expiredAt
       };
 
-      localStorage.setItem("CrawlAdmin", JSON.stringify(userData));
+      localStorage.setItem("CrawlUser", JSON.stringify(userData));
       toast.success(isLogin ? 'Login successful!' : 'Registration successful!');
 
       // Small delay to show success message before reload
@@ -171,7 +170,7 @@ const AuthForms = () => {
     }
   };
 
-  
+
   const toggleForm = () => {
     setIsLogin((prev) => !prev);
     // Reset form when switching
@@ -399,18 +398,6 @@ const AuthForms = () => {
                   className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
                 >
                   <span className="text-white font-bold">G</span>
-                </button>
-                <button
-                  type="button"
-                  className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
-                >
-                  <Mail className="w-5 h-5 text-white" />
-                </button>
-                <button
-                  type="button"
-                  className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
-                >
-                  <span className="text-white font-bold">X</span>
                 </button>
               </div>
             )}

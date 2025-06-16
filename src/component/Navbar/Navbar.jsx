@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useGlobalContext } from '../Context';
 
 const Navbar = () => {
-  const { route } = useGlobalContext();
+  const { router } = useGlobalContext();
   const pathName = usePathname();
   const isLandingPage = pathName === "/landing-page";
   return (
@@ -23,13 +23,13 @@ const Navbar = () => {
 
         <div className='flex items-center gap-10'>
           <ul className="hidden md:flex items-center gap-10 text-base font-medium">
-            <li className="cursor-pointer hover:text-gray-600" onClick={() => route.push("/discover")}>iOS</li>
+            <li className="cursor-pointer hover:text-gray-600" onClick={() => router.push("/discover")}>iOS</li>
             <li className="cursor-pointer hover:text-gray-600">Android</li>
             <li className="cursor-pointer hover:text-gray-600">Support</li>
           </ul>
 
           {/* Profile Section */}
-          <div className={`flex items-center gap-2`} onClick={() => route.push("/edit-profile")}>
+          <div className={`flex items-center gap-2`} onClick={() => router.push("/edit-profile")}>
             <Image
               src="/profile-img.png"
               alt="User Profile"
