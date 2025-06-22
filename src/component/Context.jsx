@@ -7,7 +7,8 @@ export const AppProvider = ({ children }) => {
   const publicApiUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
 
-  const [userData, setUserData] = useState({})
+  const [userData, setUserData] = useState({});
+  const [songs, setSongs] = useState({});
 
   useEffect(()=>{
     const now = new Date().getTime();
@@ -15,7 +16,7 @@ export const AppProvider = ({ children }) => {
       const savedData = localStorage.getItem("CrawlUser");
       const parseData = savedData? JSON.parse(savedData) : null
       if(now > parseData?.expiredAt ){
-        localStorage.removeItem(CrawlUser)
+        localStorage.removeItem("CrawlUser")
       }
       else{
         setUserData(parseData);
@@ -34,13 +35,31 @@ export const AppProvider = ({ children }) => {
       localStorage.removeItem("CrawlUser");
       window.location.reload();
     }
-  }
+  };
+
+   const getAllSong = async (e) => {
+    try {
+      const res = await axios.get(publicApiUrl + "songs");
+      console.log("res:", res);
+      if (res.status === 200) {
+       setSongs(res.data.data);
+      }
+    } catch (error) {
+      console.log("handleUploadSong:", error);
+      toast("Failed to fetched song!")
+    }
+  };
+
+  useEffect(()=>{
+    getAllSong();
+  },[])
 
   return <AppContext.Provider value={{
     router,
     publicApiUrl,
     userData,
-    logoutUser
+    logoutUser,
+    songs
   }}>
     {children}
   </AppContext.Provider>

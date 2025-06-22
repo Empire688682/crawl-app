@@ -1,18 +1,22 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { songs } from '@/component/data';
 import LoadingSpinner from '@/component/LoadingSpinner/LoadingSpinner';
 import SongPreview from '@/component/SongPreview/SongPreview';
+import { useGlobalContext } from '@/component/Context';
 
 const page = () => {
   const { id } = useParams();
   const [song, setSong] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const {songs} = useGlobalContext();
+
+  console.log("songs:", songs)
+  console.log("id:", id)
   useEffect(() => {
     const fetchSong = async () => {
-      const data = songs.find((song)=> song._id === Number(id));
+      const data = songs.find((song)=> song.Id === id);
       if(data){
         setSong(data);
         setLoading(false);

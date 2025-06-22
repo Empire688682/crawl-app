@@ -1,18 +1,17 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { songs } from '../data';
 import SubNavbar from '../SubNavbar/SubNavbar';
 import { useGlobalContext } from '../Context';
 
 const MyLibrary = () => {
+    const { router, songs } = useGlobalContext();
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredSongs, setFilteredSongs] = useState(songs || []);
-    const { route } = useGlobalContext();
 
     useEffect(() => {
-        const results = songs.filter(song =>
-            song.name.toLowerCase().includes(searchTerm.toLowerCase())
+        const results = songs?.filter(song =>
+            song.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredSongs(results);
     }, [searchTerm]);
@@ -49,7 +48,7 @@ const MyLibrary = () => {
                             filteredSongs.map((song) => (
                                 <div
                                     key={song._id}
-                                    onClick={() => { route.push(`/library/${song._id}`); window.scrollTo(0, 0) }}
+                                    onClick={() => { router.push(`/library/${song._id}`); window.scrollTo(0, 0) }}
                                     className="grid md:grid-cols-5 grid-cols-3 gap-4 p-3 border-gray-700 text-sm hover:bg-gray-700 cursor-pointer"
                                 >
                                     <div>{song.name}</div>
