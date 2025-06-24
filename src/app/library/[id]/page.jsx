@@ -1,29 +1,45 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { songs } from '@/component/data';
 import LoadingSpinner from '@/component/LoadingSpinner/LoadingSpinner';
 import SongPreview from '@/component/SongPreview/SongPreview';
+import { useGlobalContext } from '@/component/Context';
+import axios from "axios";
 
 const page = () => {
   const { id } = useParams();
   const [song, setSong] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  useEffect(() => {
-    const fetchSong = async () => {
-      const data = songs.find((song)=> song._id === Number(id));
-      if(data){
-        setSong(data);
-        setLoading(false);
+  const { publicApiUrl } = useGlobalContext();
+  
+    const fetchAllSongs = async () => {
+      try {
+        const res = await axios.get(publicApiUrl + "songs");
+        if (res.status === 200) {
+          const fetched = res.data.data;
+  
+          if (id) {
+            const findedSong = fetched.find(
+              (song) => song.ID === id
+            );
+            setSong(findedSong);
+            if(song){
+              setLoading(false);
+            }
+          }
+        } else {
+          setSong({});
+        }
+      } catch (err) {
+        console.error("fetchAllSongs error:", err);
       }
-      else{
-        setLoading(false);
-        setError(true);
-      }
-    }
-    fetchSong()
-  }, [])
+    };
+  
+    useEffect(() => {
+      fetchAllSongs();
+    }, []);
+  
   return (
     <div className="min-h-screen text-white pr-6 pl-6 pb-22 pt-6">
       {
@@ -40,20 +56,20 @@ const page = () => {
                 </div>
               ) : (
                 <SongPreview
-                name={song.name}
-                artist={song.artist}
-                album={song.album}
+                name={song.title}
+                artist={song.artist_name}
+                album={song.album || "Single"}
                 genre={song.genre} 
                 duration={song.duration}
-                coverImg={song.coverImg}
-                audioFile={song.audioFile}
-                lyrics={song.lyrics}
-                aboutArtist={song.aboutArtist}
+                coverImg={song.cover_art || "/crawl-logo-.png"}
+                audioFile={song.audio_url}
+                lyrics={song.lyrics || "Not available"}
+                aboutArtist={song.aboutArtist || "Not available"}
                 releaseDate={song.releaseDate}
-                producer={song.producer}
-                composer={song.composer}
-                credits={song.credits}
-                mainArtist={song.mainArtist}
+                producer={song.producer || "Not avalable"}
+                composer={song.composer || "Not available"}
+                credits={song.credits || "Not available"}
+                mainArtist={song.mainArtist || "Not available"}
                 />
               )
             }

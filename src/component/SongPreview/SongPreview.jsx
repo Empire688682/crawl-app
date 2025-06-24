@@ -21,7 +21,7 @@ const SongPreview = ({
   const [showAllCredits, setShowAllCredits] = useState(false);
   const audioRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
-
+  
   // Play/Pause toggle
   const togglePlay = () => {
     if (!audioRef.current) return;
