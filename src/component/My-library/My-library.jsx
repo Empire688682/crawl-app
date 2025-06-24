@@ -1,17 +1,18 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { songs } from '../data';
 import SubNavbar from '../SubNavbar/SubNavbar';
 import { useGlobalContext } from '../Context';
 
 const MyLibrary = () => {
-    const { router, songs } = useGlobalContext();
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredSongs, setFilteredSongs] = useState(songs || []);
+    const { router } = useGlobalContext();
 
     useEffect(() => {
-        const results = songs?.filter(song =>
-            song.title.toLowerCase().includes(searchTerm.toLowerCase())
+        const results = songs.filter(song =>
+            song.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredSongs(results);
     }, [searchTerm]);

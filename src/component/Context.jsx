@@ -8,7 +8,6 @@ export const AppProvider = ({ children }) => {
   const router = useRouter();
 
   const [userData, setUserData] = useState({});
-  const [songs, setSongs] = useState({});
 
   useEffect(()=>{
     const now = new Date().getTime();
@@ -37,29 +36,11 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-   const getAllSong = async (e) => {
-    try {
-      const res = await axios.get(publicApiUrl + "songs");
-      console.log("res:", res);
-      if (res.status === 200) {
-       setSongs(res.data.data);
-      }
-    } catch (error) {
-      console.log("handleUploadSong:", error);
-      toast("Failed to fetched song!")
-    }
-  };
-
-  useEffect(()=>{
-    getAllSong();
-  },[])
-
   return <AppContext.Provider value={{
     router,
     publicApiUrl,
     userData,
-    logoutUser,
-    songs
+    logoutUser
   }}>
     {children}
   </AppContext.Provider>

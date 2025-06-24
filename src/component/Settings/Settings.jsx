@@ -23,7 +23,7 @@ const Settings = () => {
       {/* header */}
       <div className="flex items-center gap-4 mb-8">
         {/* avatar placeholder */}
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-pink-600 text-lg font-bold uppercase">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-black text-lg font-bold uppercase">
           {firstInitial}
         </div>
 
