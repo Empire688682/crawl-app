@@ -57,7 +57,7 @@ const page = () => {
               ) : (
                 <SongPreview
                 name={song.title}
-                artist={song.artist_name}
+                artist={song.artists_names}
                 album={song.album || "Single"}
                 genre={song.genre} 
                 duration={song.duration}

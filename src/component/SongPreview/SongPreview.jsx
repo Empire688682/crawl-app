@@ -7,7 +7,6 @@ const SongPreview = ({
   artist,
   album,
   genre,
-  duration,
   coverImg,
   audioFile, // make sure this is a valid audio URL
   lyrics,
