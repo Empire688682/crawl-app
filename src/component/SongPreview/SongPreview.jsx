@@ -81,9 +81,9 @@ const SongPreview = ({
           src={coverImg}
           alt={`${artist}-${name}-cover-(Crawl)`}
           title={`${name}-cover-(Crawl)`}
-          width={400}
-          height={200}
-          style={{ objectFit: 'cover', height:"250px", borderRadius: '9px' }}
+          width={250}
+          height={250}
+          style={{ objectFit: 'cover', height:"250px", width:"250px", borderRadius: '200px' }}
         />
 
         <div className="text-sm text-gray-400">Preview</div>

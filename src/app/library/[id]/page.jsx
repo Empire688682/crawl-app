@@ -35,12 +35,12 @@ const page = () => {
         console.error("fetchAllSongs error:", err);
       }
     };
-
-     console.log("fetched:", song);
   
     useEffect(() => {
       fetchAllSongs();
     }, []);
+
+    console.log("songs:", song);
   
   return (
     <div className="min-h-screen text-white pr-6 pl-6 pb-22 pt-6">
