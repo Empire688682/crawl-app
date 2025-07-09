@@ -1,16 +1,17 @@
 "use client";
 import React, { useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const AppContext = React.createContext();
 export const AppProvider = ({ children }) => {
   const publicApiUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
-
+  const pathName = usePathname();
   const [userData, setUserData] = useState({});
+  const [isInitialize, setIsInitialize] = useState(false);
 
-  useEffect(()=>{
-    const now = new Date().getTime();
+  const checkIsUserAuthenticated  = ()=>{
+     const now = new Date().getTime();
     if(typeof window !== "undefined"){
       const savedData = localStorage.getItem("CrawlUser");
       const parseData = savedData? JSON.parse(savedData) : null
@@ -21,20 +22,38 @@ export const AppProvider = ({ children }) => {
         setUserData(parseData);
       }
     }
-  }, []);
+    setIsInitialize(true);
+  }
 
-    useEffect(() => {
-    if (!userData?.token && !userData?.username) {
-      router.replace("/signup");
-    }
-  }, [userData]);
+  useEffect(()=>{
+   checkIsUserAuthenticated()
+  }, []);
 
   const logoutUser = () =>{
     if(typeof window !== "undefined"){
       localStorage.removeItem("CrawlUser");
-      window.location.reload();
+      checkIsUserAuthenticated()
     }
   };
+
+  // Authenticational check
+
+  const publicPath = ["/", "/signup"];
+
+    useEffect(() => {
+      if(!isInitialize) return;
+      const isPublicRoute = publicPath.includes(pathName);
+
+      if(!userData?.username ){
+        if(!isPublicRoute){
+          router.push("/signup");
+        }
+      } else {
+        if(isPublicRoute){
+          router.push("/library");
+        }
+      }
+  }, [userData, pathName, router]);
 
   return <AppContext.Provider value={{
     router,

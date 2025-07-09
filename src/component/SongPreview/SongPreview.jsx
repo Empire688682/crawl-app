@@ -20,6 +20,8 @@ const SongPreview = ({
   const [showAllCredits, setShowAllCredits] = useState(false);
   const audioRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
+
+  console.log("coverImg:", coverImg);
   
   // Play/Pause toggle
   const togglePlay = () => {
@@ -78,14 +80,14 @@ const SongPreview = ({
         <Image
           src={coverImg}
           alt={`${artist}-${name}-cover-(Crawl)`}
-          title={`${artist}-${name}-cover-(Crawl)`}
+          title={`${name}-cover-(Crawl)`}
           width={400}
-          height={400}
-          style={{ objectFit: 'cover', borderRadius: '9px' }}
+          height={200}
+          style={{ objectFit: 'cover', height:"250px", borderRadius: '9px' }}
         />
 
         <div className="text-sm text-gray-400">Preview</div>
-        <div className="text-lg font-semibold text-white">{name}</div>
+        <div className="text-lg font-semibold capitalize text-white">{name}</div>
         <div className="text-sm text-gray-400">{artist}</div>
 
         <div className="w-full mt-4">

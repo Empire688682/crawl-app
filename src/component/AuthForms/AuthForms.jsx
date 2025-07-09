@@ -35,8 +35,8 @@ const AuthForms = () => {
 
   // Helper function to validate form data
   const validateForm = () => {
-    if (!formData.username.trim()) {
-      toast.error('Username is required');
+    if (!formData.email.trim()) {
+      toast.error('Email is required');
       return false;
     }
     if (!formData.password.trim()) {
@@ -110,7 +110,7 @@ const AuthForms = () => {
       if (isLogin) {
         endpoint = `${publicApiUrl}login`;
         requestData = {
-          username: formData.username,
+          email: formData.email,
           password: formData.password
         };
       } else {
@@ -135,7 +135,7 @@ const AuthForms = () => {
         return;
       }
 
-      const result = isLogin ? response.data : response.data.Data
+      const result = isLogin ? response.data.data : response.data.data.Data
 
       console.log(`${isLogin ? 'Login' : 'Signup'} result:`, result);
 
@@ -249,7 +249,9 @@ const AuthForms = () => {
             }
             
             {/* Username Field */}
-            <div className="relative">
+            {
+              !isLogin && (
+                <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
@@ -261,9 +263,11 @@ const AuthForms = () => {
                 required
               />
             </div>
+              )
+            }
 
             {/* Email Field (only for signup) */}
-            {!isLogin && (
+            {isLogin && (
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input

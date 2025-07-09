@@ -35,6 +35,8 @@ const page = () => {
         console.error("fetchAllSongs error:", err);
       }
     };
+
+     console.log("fetched:", song);
   
     useEffect(() => {
       fetchAllSongs();
@@ -61,7 +63,7 @@ const page = () => {
                 album={song.album || "Single"}
                 genre={song.genre} 
                 duration={song.duration}
-                coverImg={song.cover_art || "/crawl-logo-.png"}
+                coverImg={song.cover_image_url || "/crawl-logo-.png"}
                 audioFile={song.audio_url}
                 lyrics={song.lyrics || "Not available"}
                 aboutArtist={song.aboutArtist || "Not available"}
