@@ -38,7 +38,7 @@ export const AppProvider = ({ children }) => {
 
   // Authenticational check
 
-  const publicPath = ["/", "/signup"];
+  const publicPath = ["/", "/signup", "/library", "/library/"];
 
     useEffect(() => {
       if(!isInitialize) return;
