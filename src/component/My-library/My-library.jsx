@@ -90,7 +90,7 @@ const MyLibrary = () => {
                                     className="grid md:grid-cols-5 grid-cols-3 gap-4 p-3 border-gray-700 text-sm hover:bg-gray-700 cursor-pointer"
                                 >
                                     <div>{song.title}</div>
-                                    <div>{formatSecondsToTime(song.duration)}</div>
+                                    {/* <div>{formatSecondsToTime(song.duration)}</div> */}
                                     <div>{song.artists_names}</div>
                                     <div className='hidden md:block'>{song.album || "Single"}</div>
                                     <div className='hidden md:block'>{song.genre}</div>
