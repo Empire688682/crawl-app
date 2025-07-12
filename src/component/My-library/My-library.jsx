@@ -71,7 +71,7 @@ const MyLibrary = () => {
                             <div className='flex items-center gap-2'>Name
                                 <MdKeyboardArrowDown className='text-white text-2xl' />
                             </div>
-                            <div>Time</div>
+                            {/* <div>Time</div> */}
                             <div>Artist</div>
                             <div className='hidden md:block'>Album</div>
                             <div className='hidden md:block'>Genre</div>

@@ -36,24 +36,24 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  // Authenticational check
+  // // Authenticational check
 
-  const publicPath = ["/", "/signup", "/library", "/library/"];
+  // const publicPath = ["/", "/signup", "/library", "/library/"];
 
-    useEffect(() => {
-      if(!isInitialize) return;
-      const isPublicRoute = publicPath.includes(pathName);
+  //   useEffect(() => {
+  //     if(!isInitialize) return;
+  //     const isPublicRoute = publicPath.includes(pathName);
 
-      if(!userData?.username ){
-        if(!isPublicRoute){
-          router.push("/signup");
-        }
-      } else {
-        if(isPublicRoute){
-          router.push("/library");
-        }
-      }
-  }, [userData, pathName, router]);
+  //     if(!userData?.username ){
+  //       if(!isPublicRoute){
+  //         router.push("/signup");
+  //       }
+  //     } else {
+  //       if(isPublicRoute){
+  //         router.push("/library");
+  //       }
+  //     }
+  // }, [userData, pathName, router]);
 
   return <AppContext.Provider value={{
     router,
